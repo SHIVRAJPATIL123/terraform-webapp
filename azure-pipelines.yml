@@ -1,0 +1,54 @@
+trigger: None
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: TerraformInstaller@0
+  displayName: "Terraform install"
+  inputs: 
+   terraformVersion: 'latest'
+
+- task: TerraformTaskV4@4
+  displayName: "Terraform init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    backendAzureRmResourceGroupName: 'azuredevops'
+    backendAzureRmStorageAccountName: 'azuredevops4544'
+    backendAzureRmContainerName: 'azuredevopscontainer'
+    backendAzureRmKey: 'terraform.tfstate'
+  
+    
+- task: TerraformTaskV4@4
+  displayName: "Terraform plan "
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '-out=terraform.tfplan'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+
+
+- task: PublishBuildArtifacts@1
+  displayName: "publish build artifacts"
+  inputs:
+    pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
+    artifactName: 'terraformPlan'
+    publishLocation: 'Container'    
+
+
+- task: TerraformTaskV4@4
+  displayName: "Terraform apply"
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+
+
+- task: TerraformTaskV4@4
+  displayName: "Terraform destroy"
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
