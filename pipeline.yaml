@@ -38,12 +38,12 @@ steps:
     publishLocation: 'Container'    
 
 
-# - task: TerraformTaskV4@4
-#   displayName: "Terraform apply"
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'apply'
-#     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+- task: TerraformTaskV4@4
+  displayName: "Terraform apply"
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
 - task: TerraformTaskV4@4
   displayName: "Terraform destroy"
