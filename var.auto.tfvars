@@ -8,7 +8,7 @@ sku_size = "B1"
 
 web_app_name = "mfwebapp4567"
         
-dotnet_framework_version = "v7.0"
+dotnet_framework_version = "latest"
 
 
 azurerm_service_plan = "Basic"
