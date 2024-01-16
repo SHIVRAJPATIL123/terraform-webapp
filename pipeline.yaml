@@ -45,30 +45,6 @@ steps:
     command: 'apply'
     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
-
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: latest
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
-    appType: 'webApp'
-    WebAppName: 'mfwebapp4567'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
 - task: TerraformTaskV4@4
   displayName: "Terraform destroy"
   inputs:
