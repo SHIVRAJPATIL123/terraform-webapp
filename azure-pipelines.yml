@@ -14,7 +14,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    backendServiceArm: 'terraform'
     backendAzureRmResourceGroupName: 'azuredevops'
     backendAzureRmStorageAccountName: 'azuredevops4544'
     backendAzureRmContainerName: 'azuredevopscontainer'
@@ -26,7 +26,7 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     commandOptions: '-out=terraform.tfplan'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    environmentServiceNameAzureRM: 'terraform'
 
 - task: PublishBuildArtifacts@1
   displayName:  "publish build Artifact"
@@ -40,11 +40,11 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    environmentServiceNameAzureRM: 'terraform'
 
 - task: TerraformTaskV4@4
   displayName: "terraform destroy"
   inputs:
     provider: 'azurerm'
     command: 'destroy'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    environmentServiceNameAzureRM: 'terraform'
