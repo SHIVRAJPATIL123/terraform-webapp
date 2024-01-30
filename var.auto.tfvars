@@ -1,6 +1,6 @@
 resource_group_name = "tfrg"
 
-resource_group_location = "eastus"
+resource_group_location = "eastus2"
 
 static_site_name = "mfstaticwebapp"
 
